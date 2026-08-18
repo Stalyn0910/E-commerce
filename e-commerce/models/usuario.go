@@ -11,11 +11,11 @@ import (
 //==========================================================
 
 type Usuario struct {
-	id          int
-	nombre      string
-	email       string
-	contrasena  string
-	rol         string
+	ID          int
+	Nombre      string
+	Email       string
+	Contrasena  string
+	Rol         string
 }
 
 //==========================================================
@@ -24,30 +24,30 @@ type Usuario struct {
 
 func NuevoUsuario(id int, nombre, email, contrasena, rol string) *Usuario {
 	return &Usuario{
-		id: id,
-		nombre: nombre,
-		email: email,
-		contrasena: contrasena,
-		rol: rol,
+		ID: id,
+		Nombre: nombre,
+		Email: email,
+		Contrasena: contrasena,
+		Rol: rol,
 	}
 }
 
 //================ GETTERS =================
 
 func (u *Usuario) GetID() int {
-	return u.id
+	return u.ID
 }
 
 func (u *Usuario) GetNombre() string {
-	return u.nombre
+	return u.Nombre
 }
 
 func (u *Usuario) GetEmail() string {
-	return u.email
+	return u.Email
 }
 
 func (u *Usuario) GetRol() string {
-	return u.rol
+	return u.Rol
 }
 
 //================ SETTERS =================
@@ -58,7 +58,7 @@ func (u *Usuario) SetNombre(nombre string) error {
 		return errors.New("el nombre no puede estar vacío")
 	}
 
-	u.nombre = nombre
+	u.Nombre = nombre
 	return nil
 }
 
@@ -68,7 +68,7 @@ func (u *Usuario) SetEmail(email string) error {
 		return errors.New("el correo no puede estar vacío")
 	}
 
-	u.email = email
+	u.Email = email
 	return nil
 }
 
@@ -78,6 +78,6 @@ func (u *Usuario) SetContrasena(password string) error {
 		return errors.New("la contraseña debe tener al menos 6 caracteres")
 	}
 
-	u.contrasena = password
+	u.Contrasena = password
 	return nil
 }

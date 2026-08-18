@@ -10,19 +10,19 @@ import "time"
 
 type Pedido struct {
 
-	id int
+	ID int
 
-	fechaPedido time.Time
+	FechaPedido time.Time
 
-	estado string
+	Estado string
 
-	total float64
+	Total float64
 
-	usuario *Usuario
+	Usuario *Usuario
 
-	pago *Pago
+	Pago *Pago
 
-	detalles []*DetallePedido
+	Detalles []*DetallePedido
 
 }
 
@@ -40,15 +40,15 @@ func NuevoPedido(
 
 	return &Pedido{
 
-		id: id,
+		ID: id,
 
-		usuario: usuario,
+		Usuario: usuario,
 
-		fechaPedido: time.Now(),
+		FechaPedido: time.Now(),
 
-		estado: "Pendiente",
+		Estado: "Pendiente",
 
-		detalles: []*DetallePedido{},
+		Detalles: []*DetallePedido{},
 
 	}
 
@@ -64,9 +64,9 @@ func (p *Pedido) AgregarDetalle(
 
 ) {
 
-	p.detalles = append(
+	p.Detalles = append(
 
-		p.detalles,
+		p.Detalles,
 
 		detalle,
 
@@ -84,13 +84,13 @@ func (p *Pedido) CalcularTotal() {
 
 	total := 0.0
 
-	for _, detalle := range p.detalles {
+	for _, detalle := range p.Detalles {
 
 		total += detalle.GetSubtotal()
 
 	}
 
-	p.total = total
+	p.Total = total
 
 }
 
@@ -100,31 +100,31 @@ func (p *Pedido) CalcularTotal() {
 
 func (p *Pedido) GetID() int {
 
-	return p.id
+	return p.ID
 
 }
 
 func (p *Pedido) GetEstado() string {
 
-	return p.estado
+	return p.Estado
 
 }
 
 func (p *Pedido) GetTotal() float64 {
 
-	return p.total
+	return p.Total
 
 }
 
 func (p *Pedido) GetDetalles() []*DetallePedido {
 
-	return p.detalles
+	return p.Detalles
 
 }
 
 func (p *Pedido) GetUsuario() *Usuario {
 
-	return p.usuario
+	return p.Usuario
 
 }
 
@@ -138,6 +138,6 @@ func (p *Pedido) ActualizarEstado(
 
 ) {
 
-	p.estado = estado
+	p.Estado = estado
 
 }

@@ -3,7 +3,7 @@ package services
 import (
 	"fmt"
 
-	"p/models"
+	"e-commerce/models"
 )
 
 //==========================================================

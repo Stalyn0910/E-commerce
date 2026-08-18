@@ -1,6 +1,6 @@
 package data
 
-import "p/models"
+import "e-commerce/models"
 
 //==========================================================
 // MEMORIA DEL SISTEMA

@@ -8,17 +8,17 @@ import "errors"
 
 type Producto struct {
 
-	id int
+	ID int
 
-	nombre string
+	Nombre string
 
-	descripcion string
+	Descripcion string
 
-	precio float64
+	Precio float64
 
-	stock int
+	Stock int
 
-	categoria string
+	Categoria string
 
 }
 
@@ -42,17 +42,17 @@ func NuevoProducto(
 
 	return &Producto{
 
-		id: id,
+		ID: id,
 
-		nombre: nombre,
+		Nombre: nombre,
 
-		descripcion: descripcion,
+		Descripcion: descripcion,
 
-		precio: precio,
+		Precio: precio,
 
-		stock: stock,
+		Stock: stock,
 
-		categoria: categoria,
+		Categoria: categoria,
 
 	}
 
@@ -61,27 +61,27 @@ func NuevoProducto(
 //================ GETTERS =================
 
 func (p *Producto) GetID() int {
-	return p.id
+	return p.ID
 }
 
 func (p *Producto) GetNombre() string {
-	return p.nombre
+	return p.Nombre
 }
 
 func (p *Producto) GetDescripcion() string {
-	return p.descripcion
+	return p.Descripcion
 }
 
 func (p *Producto) GetPrecio() float64 {
-	return p.precio
+	return p.Precio
 }
 
 func (p *Producto) GetStock() int {
-	return p.stock
+	return p.Stock
 }
 
 func (p *Producto) GetCategoria() string {
-	return p.categoria
+	return p.Categoria
 }
 
 //================ SETTERS =================
@@ -92,7 +92,7 @@ func (p *Producto) SetPrecio(precio float64) error {
 		return errors.New("precio inválido")
 	}
 
-	p.precio = precio
+	p.Precio = precio
 
 	return nil
 }
@@ -103,7 +103,7 @@ func (p *Producto) SetStock(stock int) error {
 		return errors.New("stock inválido")
 	}
 
-	p.stock = stock
+	p.Stock = stock
 
 	return nil
 }

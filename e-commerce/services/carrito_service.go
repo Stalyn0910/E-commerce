@@ -2,7 +2,7 @@ package services
 
 import (
 	"errors"
-	"p/models"
+	"e-commerce/models"
 )
 
 //==========================================================

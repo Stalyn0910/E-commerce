@@ -2,7 +2,8 @@ package services
 
 import (
 	"errors"
-	"p/models"
+	"e-commerce/models"
+	"sync"
 )
 
 //==========================================================
@@ -24,7 +25,10 @@ import (
 type UsuarioService struct {
 
 	usuarios map[int]*models.Usuario
+	
+	siguienteID int
 
+	mutex sync.RWMutex
 }
 
 //==========================================================
@@ -35,8 +39,8 @@ func NuevoUsuarioService() *UsuarioService {
 
 	return &UsuarioService{
 
-		usuarios: make(map[int]*models.Usuario),
-
+		usuarios:  make(map[int]*models.Usuario),
+		siguienteID: 1,
 	}
 
 }
@@ -47,20 +51,32 @@ func NuevoUsuarioService() *UsuarioService {
 // Registra un nuevo usuario.
 //
 //==========================================================
+func (s *UsuarioService) GenerarID() int {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+
+	id := s.siguienteID
+
+	s.siguienteID++
+
+	return id
+}
 
 func (s *UsuarioService) Crear(
 
 	usuario *models.Usuario,
 
 ) error {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
 
 	if _, existe := s.usuarios[usuario.GetID()]; existe {
 
-		return errors.New("el usuario ya existe")
+	return errors.New("el usuario ya existe")
 
-	}
+}
 
-	s.usuarios[usuario.GetID()] = usuario
+s.usuarios[usuario.GetID()] = usuario
 
 	return nil
 
@@ -75,6 +91,8 @@ func (s *UsuarioService) Buscar(
 	id int,
 
 ) (*models.Usuario, error) {
+	s.mutex.RLock()
+	defer s.mutex.RUnlock()
 
 	usuario, existe := s.usuarios[id]
 
@@ -97,6 +115,8 @@ func (s *UsuarioService) Actualizar(
 	usuario *models.Usuario,
 
 ) error {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
 
 	if _, existe := s.usuarios[usuario.GetID()]; !existe {
 
@@ -119,6 +139,8 @@ func (s *UsuarioService) Eliminar(
 	id int,
 
 ) error {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
 
 	if _, existe := s.usuarios[id]; !existe {
 
@@ -137,6 +159,8 @@ func (s *UsuarioService) Eliminar(
 //==========================================================
 
 func (s *UsuarioService) Listar() []*models.Usuario {
+	s.mutex.RLock()
+	defer s.mutex.RUnlock()
 
 	lista := []*models.Usuario{}
 
